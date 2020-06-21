@@ -1,38 +1,50 @@
 <template>
     <div class="history">
         <h2 class="shadow-sm m-0 pb-2">Ascent history:</h2>
-        <div class="pr-3 pl-3 pt-0 pb-0">
-            <div class="row shadow-sm">
-                <div class="col">
-                    <span>Grade</span>
+        <div class="shadow-sm row no-gutters">
+            <div class="row pr-lg-3">
+                <div class="col-3">
+                    <div class="row d-flex justify-content-center no-gutters">
+                        <v-icon class="col-lg-3 col-sm-12 m-sm-0">mdi-chevron-double-up</v-icon>
+                        <span class="col-lg-3 col-sm-12 m-sm-0">Grade</span>
+                        <v-icon class="col-lg-3 col-sm-12 m-sm-0">mdi-chevron-double-down</v-icon>
+                    </div>
                 </div>
-                <div class="col">
-                    <span>Style</span>
+                <div class="col-4">
+                    <div class="row d-flex align-content-center justify-content-center no-gutters">
+                        <v-icon class="col-lg-3 col-sm-12 m-0">mdi-chevron-double-up</v-icon>
+                        <span class="col-lg-3 col-sm-12 m-0"> Style </span>
+                        <v-icon class="col-lg-3 col-sm-12 m-0">mdi-chevron-double-down</v-icon>
+                    </div>
                 </div>
-                <div class="col">
-                    <span>Date</span>
+                <div class="col-3">
+                    <div class="row d-flex justify-content-center no-gutters">
+                        <v-icon class="col-lg-3 col-sm-12 m-sm-0">mdi-chevron-double-up</v-icon>
+                        <span class="col-lg-3 col-sm-12 m-sm-0">Date</span>
+                        <v-icon class="col-lg-3 col-sm-12 m-sm-0">mdi-chevron-double-down</v-icon>
+                    </div>
                 </div>
-                <div class="col"></div>
+                <div class="col-1">
+                </div>
             </div>
         </div>
         <div class="historyList">
             <transition-group v-if="loaded" name="fade" :style="{ '--total': climbingHistory.length }" appear>
                 <div v-for="(history,i) in climbingHistory" :key="history.id" :style="{'--i':i}"
                      class="historyElement shadow-sm">
-                    <div class=" row align-items-center">
-
-                        <div class="col m-3">
+                    <div class="row align-items-center">
+                        <div class="col-3">
                             <p class="m-0">V{{history.data()['grade']}}</p>
                         </div>
 
-                        <div class="col m-3">
+                        <div class="col-4">
                             <p class="m-0">{{history.data()['style']}}</p>
                         </div>
 
-                        <div class="col m-3">
+                        <div class="col-3">
                             <p class="m-0">{{ history.data()['date']['seconds']*1000 | moment("DD.MM.YYYY") }}</p>
                         </div>
-                        <div class="col m-3">
+                        <div class="col-1">
                             <v-btn icon @click="removeAscend(history.id)">
                                 <v-icon>mdi-delete</v-icon>
                             </v-btn>
@@ -56,8 +68,7 @@
                 loaded: false,
             }
         },
-        components: {
-        },
+        components: {},
         computed: {
             date() {
                 let date = new Date(date.data()['date']['seconds'] * 1000)
@@ -83,7 +94,7 @@
                         climbingHistory.push(data)
                     })
                     this.climbingHistory = climbingHistory
-                    state.commit('setHistoryClimbing',climbingHistory)
+                    state.commit('setHistoryClimbing', climbingHistory)
                     this.loaded = true
                 })
             }
@@ -107,13 +118,15 @@
     }
 
     .historyList {
-        max-height: 70vh;
-        min-height: 70vh;
+        max-height: 75vh;
+        min-height: 75vh;
         overflow-x: hidden;
         overflow-y: auto;
+
+
     }
 
-    .historyElement:hover{
+    .historyElement:hover {
         background: #efefef;
         font-size: 20px;
     }

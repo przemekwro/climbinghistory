@@ -26,7 +26,6 @@
 <script>
     import 'bootstrap/dist/css/bootstrap.css'
     import 'bootstrap-vue/dist/bootstrap-vue.css'
-    import state from '@/store'
     import historyList from "@/components/historyList"
     import Chart from '@/components/Chart'
     import Stats from '@/components/Stats'
@@ -56,8 +55,6 @@
                         climbingHistory.push(data)
                     })
                     this.climbingHistory = climbingHistory
-                    state.commit('setHistoryClimbing',this.climbingHistory)
-
                     //data to chart
                     climbingHistory.sort(this.sortByBest)
                     climbingHistory.splice(10)

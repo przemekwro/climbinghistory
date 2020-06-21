@@ -5,6 +5,7 @@
             <h5>Best TR: V{{bestTR}}</h5>
             <h5>Best Lead: V{{bestLead}}</h5>
             <h5>Last ascend: {{ lastAscend | moment("DD.MM.YYYY") }}</h5>
+            <h5>All ascends: {{allAscends}}</h5>
         </div>
     </div>
 </template>
@@ -49,7 +50,15 @@
                         last = current
                 })
                 return last
-            }
+            },
+            allAscends(){
+                let all = state.getters.getHistoryClimbing
+                let i = 0
+                all.forEach(function () {
+                    i++;
+                })
+                return i
+            },
         },
     }
 
