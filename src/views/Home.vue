@@ -4,7 +4,7 @@
             <div class="col-lg-4 col-md-12 mb-5 pr-lg-3">
                 <Stats class="bg-white"></Stats>
                 <div class="shadow d-flex flex-column mt-5 pt-2 bg-white">
-                    <h2 class="shadow-sm pb-2 bg-white">Last month best:</h2>
+                    <h2 class="shadow-sm pb-2 bg-white">Top 10:</h2>
                     <div class="bg-white" style="min-height: 380px">
                         <Chart  height="400" v-if="loaded" :chartData="chartData"></Chart>
                     </div>
