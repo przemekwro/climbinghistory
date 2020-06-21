@@ -5,7 +5,7 @@
             |
             <router-link to="/about">Add</router-link>
         </div>
-            <transition enter-active-class="animated fade" leave-active-class="animated fade" mode="out-in" appear>
+            <transition enter-active-class="animated fade" leave-active-class="animated fade" class="" mode="out-in" appear>
                 <router-view/>
             </transition>
 
@@ -13,6 +13,10 @@
 </template>
 
 <style lang="scss">
+    body{
+        background: #EFEFEF!important;
+        height: 100vh!important;
+    }
     @media (max-width: 575px) {
         .container {
             padding-left: 0;
@@ -40,6 +44,7 @@
     }
 
     #nav {
+        background: white;
         padding: 30px;
         a {
             font-weight: bold;

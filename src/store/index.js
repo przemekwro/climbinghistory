@@ -4,12 +4,19 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+    state: {
+        historyClimbing: []
+    },
+    mutations: {
+        setHistoryClimbing(state,history){
+            state.historyClimbing = history
+        }
+    },
+    getters:{
+        getHistoryClimbing(state){
+            return state.historyClimbing
+        }
+    },
+    actions: {},
+    modules: {}
 })

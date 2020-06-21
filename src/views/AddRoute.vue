@@ -2,13 +2,13 @@
     <div class="add container">
         <div class="row mt-4 justify-content-center">
             <div class="col-lg-4 col-md-12">
-                <div class="shadow d-flex flex-column pt-2">
+                <div class="shadow d-flex flex-column pt-2 bg-white">
                     <h2 class="shadow-sm pb-2">Add new ascend</h2>
                     <div class="pb-3">
                         <h5>Grade:</h5>
                         <div id="addroutes" class="d-flex justify-content-around">
                             <div>
-                                <v-btn icon @click="removeRoute">
+                                <v-btn icon @click="decreaseGrade">
                                     <v-icon large>mdi-arrow-left-drop-circle</v-icon>
                                 </v-btn>
                             </div>
@@ -16,7 +16,7 @@
                                 <span class="text row justify-content-center align-content-center ">V{{grade}}</span>
                             </div>
                             <div>
-                                <v-btn icon color="red" @click="addRoute">
+                                <v-btn icon color="red" @click="increaseGrade">
                                     <v-icon large>mdi-arrow-right-drop-circle</v-icon>
                                 </v-btn>
                             </div>
@@ -33,18 +33,18 @@
                             </div>
                         </div>
 
-                        <v-btn @click="overlay= !overlay" tile>Add ascend</v-btn>
+                        <v-btn @click="addAscend" tile>Add ascent</v-btn>
                         <v-overlay v-if="overlay" absolute>
                             <div class="overlay col-lg-12 no-gutters p-0">
-                                <h1 class="shadow-sm p-2">Confirm</h1>
+                                <h1 class="shadow-sm p-2 pr-5 pl-5">Added:</h1>
                                 <div class="p-2">
                                     <div class="m-2">
                                         <h5>Grade: V{{grade}}</h5>
                                         <h5>Style: {{picked}}</h5>
                                     </div>
                                     <div>
-                                        <v-btn color="#42b983" class="m-3" @click="send" tile>Confirm</v-btn>
-                                        <v-btn class="m-3" @click="overlay= !overlay" tile>Cancel</v-btn>
+                                        <v-btn class="m-3" @click="back" tile>Next</v-btn>
+                                        <v-btn class="m-3" @click="toHome" tile>Home</v-btn>
                                     </div>
                                 </div>
                             </div>
@@ -57,6 +57,8 @@
 </template>
 
 <script>
+    import {db} from '@/main'
+
     export default {
         name: 'grade',
         components: {},
@@ -68,17 +70,29 @@
             }
         },
         methods: {
-            addRoute() {
+            increaseGrade() {
                 if (this.grade < 15)
                     this.grade += 1
             },
-            removeRoute() {
-                if (this.grade > 1) {
+            decreaseGrade() {
+                if (this.grade > 0) {
                     this.grade -= 1
                 }
             },
-            send() {
-                alert('send')
+            async addAscend() {
+                this.overlay = ! this.overlay
+                await db.collection("history").doc().set({
+                    grade: this.grade,
+                    style: this.picked,
+                    date: new Date()
+                })
+            },
+            toHome(){
+                this.$router.push('/')
+            },
+            back(){
+                this.grade = 5
+                this.picked = 'Lead'
                 this.overlay = !this.overlay
             }
         },
