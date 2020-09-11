@@ -1,5 +1,7 @@
 # climbinghistory
 
+Hosting: https://climbing-history.web.app/
+
 ## Project setup
 ```
 npm install
